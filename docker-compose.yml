@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  react-app:
+    build:
+      context: .                      #location of the files
+      dockerfile: Dockerfile.dev      # Docker file name if not Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - /user/app/node_modules        # Map nodemodules folder locally instead of overwriring by second command
+      - .:/user/app                   # from local directory map to container location
+    stdin_open: true                  # Keep the web application running after executing the docker run
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /user/app/node_modules
+      - .:/user/app
+    command: ["npm", "run", "test"]
