@@ -10,4 +10,6 @@ RUN npm run build
 
 #  Phase for run container
 FROM nginx
+# For Elastic beanstalk to expose the port
+EXPOSE 80
 COPY --from=builder /user/app/build /usr/share/nginx/html
