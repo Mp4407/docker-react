@@ -1,8 +1,8 @@
 # Phase for creating build docker
-FROM node:alpine as builder
+FROM node:alpine
 
 # Download and install dependencies
-WORKDIR /user/app
+WORKDIR '/user/app'
 COPY package*.json ./
 RUN npm install
 COPY . .
