@@ -3,7 +3,7 @@ FROM node:alpine as builder
 
 # Download and install dependencies
 WORKDIR /user/app
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
@@ -12,4 +12,4 @@ RUN npm run build
 FROM nginx
 # For Elastic beanstalk to expose the port
 EXPOSE 80
-COPY --from=builder /user/app/build /usr/share/nginx/html
+COPY --from=0 /user/app/build /usr/share/nginx/html
